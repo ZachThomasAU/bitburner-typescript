@@ -1,48 +1,27 @@
-# Typescript template for Bitburner's Remote File API
+# ZachThomasAU's Bitburner Remote File API
 
-The official template for synchronizing Typescript/Javascript from your computer to the game.
-
-[Step by step install](BeginnersGuide.md)
-
-[Docker install guide](DockerGuide.md) (optional) 
-
-[Learn more about Typescript](https://www.typescriptlang.org/docs/)
-
-## About
-
-This template uses the Typescript compiler and the Remote File API system to synchronize Typescript to your game.
-Due to the usage of the RFA system, it works with Web and Electron (Steam) versions of the game.
+A repository of public scripts for the Bitburner idle game. Forked from the official [bitburner typescript-template](https://github.com/bitburner-official/typescript-template).
 
 ## Prerequisites
 
 [Node.js](https://nodejs.org/en/download/) is needed for compiling typescript and installing dependencies.
 
-[See here for step by step installation](BeginnersGuide.md) if you'd like help with installing Node and/or connecting to the game.
-
 Alternatively see [Docker install guide](DockerGuide.md) (optional) that installs nodejs and the Remote File API in an isolated container.
 
 ## Quick start
-
-Download the template to your computer and install everything it requires:
 ```
-git clone https://github.com/bitburner-official/typescript-template
-cd typescript-template
 npm i
+npm run watch
 ```
 
-### How to use this template
+NOTE: On first run you will get a warning that module "@ns" could not be found. This is fine and will be resolved after first sync.
 
-Write all your typescript source code in the `/src` directory
+### How to Sync with the game
 
-To autocompile and send changed files as you save, run `npm run watch` in a terminal.
-Have it running in the background so that it all happens automatically.
-
-For Bitburner to receive any files, you need to enter the port `npm run watch` logs to the terminal
-in the Remote API section of the game settings, and press the connect button.
-
-[See here for step by step installation](BeginnersGuide.md) if you'd like help with installing Node and/or connecting to the game.
-
-Alternatively see [Docker install guide](DockerGuide.md) (optional) that installs nodejs and the Remote File API in an isolated container.
+1. Write all your typescript source code in the `/src` directory. I put my scripts in a `remote-api` folder, so my home directory in game is clean, and I can clearly distinguish between scripts written in game and in my local IDE.
+1. To autocompile and send changed files as you save, run `npm run watch` in a terminal.
+1. The command will log the port it is running on. Make a note of this.
+1. In game click on the "Settings" button and then go to "Remote API". Put in the connection details and just like that you're in business! How easy!
 
 ## Advanced
 ### Imports
@@ -53,25 +32,7 @@ To ensure both the game and typescript have no issues with import paths, your im
 - Paths must contain no leading slash
 - Paths must end with no file extension
 
-#### Examples:
-
-To import `helperFunction` from the file `helpers.ts` located in the directory `src/lib/`:
-
-```js
-import { helperFunction } from "lib/helpers";
-```
-
-To import all functions from the file `helpers.ts` located in the `src/lib/` directory as the namespace `helpers`:
-
-```js
-import * as helpers from "lib/helpers";
-```
-
-To import `someFunction` from the file `main.ts` located in the `src/` directory:
-
-```js
-import { someFunction } from "main";
-```
+NOTE: `import { NS } from "@ns";` will initially return a "No module found" type error. This is expected. Once you sync with the game for the first time this module will resolve.
 
 ### Debugging
 
